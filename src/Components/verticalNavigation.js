@@ -12,6 +12,7 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {SaveWEB3} from "../Redux/Actions/web3Actions";
 import Web3 from "web3";
+import {VerifyProduct} from "./verifyProduct";
 
 const navigationList = [
     {name: 'Add Manufacturer', href: '#', icon: UsersIcon, current: true},
@@ -230,6 +231,7 @@ export default function VerticalNavigation() {
                             </div>
                         </div>
                     </div>
+                    {(navigation[2].current) && <VerifyProduct/>}
                 </div>
             </div>
         </>
