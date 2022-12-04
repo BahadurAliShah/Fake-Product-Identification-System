@@ -17,6 +17,7 @@ import CreateManufacturer from "./createManufacturer";
 import AddProduct from './addProduct';
 import ChangeOwner from './changeOwner';
 import GetManufacturerProducts from "./getManufacturerProducts";
+import GetUserProducts from './getUserProducts';
 
 const navigationList = [
     {name: 'Add Manufacturer', href: '#', icon: UsersIcon, current: true},
@@ -240,6 +241,7 @@ export default function VerticalNavigation() {
                     {(navigation[2].current) && <VerifyProduct/>}
                     {(navigation[3].current) && <ChangeOwner/>}
                     {(navigation[4].current) && <GetManufacturerProducts/>}
+                    {(navigation[5].current) && <GetUserProducts/>}
                 </div>
             </div>
         </>

@@ -1,9 +1,9 @@
-//adding getmanufacturerproducts component
+// adding getUserProducts component
 import React, { Component } from 'react';
 import {useState} from 'react'
 import Web3 from 'web3';
 
-export default function GetManufacturerProducts() {
+export default function GetUserProducts() {
     const [product, setProduct] = useState({
         name: '',
         price: '',
@@ -31,7 +31,7 @@ export default function GetManufacturerProducts() {
     return (
         <form className="space-y-6" action="#" method="POST">
         <div>
-            <label htmlFor="name" className="flex justify-center text-xl mt-5 font-medium text-gray-800">Get Manufacturer Products</label>
+            <label htmlFor="name" className="flex justify-center text-xl mt-5 font-medium text-gray-800">Get User Products</label>
         </div>
 
       <div className="bg-white px-4 py-5 flex items-center justify-center shadow sm:rounded-lg sm:p-6">
@@ -41,12 +41,12 @@ export default function GetManufacturerProducts() {
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
                 <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
-                  Manufacturer ID
+                  User ID
                 </label>
                 <input
                   type="text"
                   name="first-name"
-                  placeholder='Enter the manufacturer ID'
+                  placeholder='Enter the User ID'
                   id="first-name"
                   autoComplete="given-name"
                   className="mt-1 block w-full rounded-xl h-7 border-blue-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -72,4 +72,5 @@ export default function GetManufacturerProducts() {
                 </button>
       </div>
     </form>
-    )}
+    )
+}
