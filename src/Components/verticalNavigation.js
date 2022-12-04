@@ -195,7 +195,7 @@ export default function VerticalNavigation() {
                         {/* Move the following to the right */}
                         <div className="flex-1 flex justify-between px-4 sm:px-6 lg:px-8">
 
-                            <div className="ml-4 flex flex-1 items-center md:ml-6 top-0 ">
+                            <div className="flex flex-1 items-center justify-end">
                                 <Menu as="div" className="relative ml-3">
                                     <div>
                                         <button
