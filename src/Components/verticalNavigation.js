@@ -15,6 +15,8 @@ import Web3 from "web3";
 import {VerifyProduct} from "./verifyProduct";
 import CreateManufacturer from "./createManufacturer";
 import AddProduct from './addProduct';
+import ChangeOwner from './changeOwner';
+import GetManufacturerProducts from "./getManufacturerProducts";
 
 const navigationList = [
     {name: 'Add Manufacturer', href: '#', icon: UsersIcon, current: true},
@@ -236,6 +238,8 @@ export default function VerticalNavigation() {
                     {(navigation[0].current) && <CreateManufacturer/>}
                     {(navigation[1].current) && <AddProduct/>}
                     {(navigation[2].current) && <VerifyProduct/>}
+                    {(navigation[3].current) && <ChangeOwner/>}
+                    {(navigation[4].current) && <GetManufacturerProducts/>}
                 </div>
             </div>
         </>

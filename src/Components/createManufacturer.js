@@ -30,7 +30,7 @@ export default function CreateManufacturer() {
     return (
         <form className="space-y-6" action="#" method="POST">
             <div>
-                <label htmlFor="name" className="block flex justify-center mt-5 text-xl font-medium text-gray-800">Create
+                <label htmlFor="name" className="flex justify-center mt-5 text-xl font-medium text-gray-800">Create
                     Manufacturer</label>
             </div>
 
@@ -46,6 +46,7 @@ export default function CreateManufacturer() {
                                 <input
                                     type="text"
                                     name="first-name"
+                                    placeholder='Enter the Name'
                                     id="first-name"
                                     autoComplete="given-name"
                                     className="mt-1 block w-full rounded-xl h-7 border-blue-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -54,12 +55,13 @@ export default function CreateManufacturer() {
                             <br></br>
                             <div className="col-span-6 sm:col-span-3">
                                 <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
-                                    Last name
+                                    Company Name
                                 </label>
                                 <input
                                     type="text"
                                     name="last-name"
                                     id="last-name"
+                                    placeholder='Enter the Company Name'
                                     autoComplete="family-name"
                                     className="mt-1 block w-full rounded-xl h-7 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 />
@@ -67,12 +69,13 @@ export default function CreateManufacturer() {
 
                             <div className="col-span-6 sm:col-span-4">
                                 <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
-                                    Email address
+                                    Company Location
                                 </label>
                                 <input
                                     type="text"
                                     name="email-address"
                                     id="email-address"
+                                    placeholder='Enter the Company Location'
                                     autoComplete="email"
                                     className="mt-1 block w-full rounded-xl h-7 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 />
