@@ -1,3 +1,4 @@
+@import url("https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css");
 .justify-end {
   justify-content: flex-end;
 }
