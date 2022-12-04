@@ -13,7 +13,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {SaveWEB3} from "../Redux/Actions/web3Actions";
 import Web3 from "web3";
 
-const navigation = [
+const navigationList = [
     {name: 'Add Manufacturer', href: '#', icon: UsersIcon, current: true},
     {name: 'Add Product', href: '#', icon: UsersIcon, current: false},
     {name: 'Verify Product', href: '#', icon: FolderIcon, current: false},
@@ -31,8 +31,16 @@ export default function VerticalNavigation() {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const dispatch = useDispatch();
     const web3 = useSelector(state => state.web3);
-    const state = useSelector(state => state);
-    console.log("State======================", state);
+
+    const [navigation, setNavigation] = useState([...navigationList])
+
+    const HandleNavigation = async (name) => {
+        let newNavigation = navigation.map((item) => {
+            item.name === name ? item.current = true : item.current = false;
+            return item;
+        });
+        setNavigation(newNavigation);
+    }
 
     const connect = async () => {
         if (web3.web3 === null) {
@@ -117,7 +125,7 @@ export default function VerticalNavigation() {
                                             {navigation.map((item) => (
                                                 <a
                                                     key={item.name}
-                                                    href={item.href}
+                                                    onClick={() => HandleNavigation(item.name)}
                                                     className={classNames(
                                                         item.current
                                                             ? 'bg-gray-900 text-white'
@@ -162,7 +170,9 @@ export default function VerticalNavigation() {
                                 {navigation.map((item) => (
                                     <a
                                         key={item.name}
-                                        href={item.href}
+                                        onClick={() => {
+                                            HandleNavigation(item.name)
+                                        }}
                                         className={classNames(
                                             item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                             'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
@@ -220,21 +230,6 @@ export default function VerticalNavigation() {
                             </div>
                         </div>
                     </div>
-
-                    <main className="flex-1">
-                        <div className="py-6">
-                            <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-                                <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
-                            </div>
-                            <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-                                {/* Replace with your content */}
-                                <div className="py-4">
-                                    <div className="h-96 rounded-lg border-4 border-dashed border-gray-200"/>
-                                </div>
-                                {/* /End replace */}
-                            </div>
-                        </div>
-                    </main>
                 </div>
             </div>
         </>
