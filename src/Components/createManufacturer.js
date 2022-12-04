@@ -30,7 +30,7 @@ export default function CreateManufacturer() {
     return (
         <form className="space-y-6" action="#" method="POST">
             <div>
-                <label htmlFor="name" className="block flex justify-center text-xl font-medium text-gray-800">Create
+                <label htmlFor="name" className="block flex justify-center mt-5 text-xl font-medium text-gray-800">Create
                     Manufacturer</label>
             </div>
 
