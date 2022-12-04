@@ -1,13 +1,16 @@
-import './App.css';
-import {ConnectButton} from "./Components/connect";
+import React from "react";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import Admin from "./pages/Admin";
+import './assets/main.css'
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <ConnectButton/>
-      </header>
-    </div>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Admin/>}/>
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;

@@ -12,5 +12,9 @@
     "@truffle/hdwallet-provider": "^2.1.2",
     "dotenv": "^16.0.3",
     "ganache-cli": "^6.12.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss-cli": "^10.1.0"
   }
 }
