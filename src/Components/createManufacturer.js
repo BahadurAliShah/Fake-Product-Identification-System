@@ -1,86 +1,69 @@
 import {useState} from 'react'
-import Web3 from "web3";
 import {useDispatch, useSelector} from "react-redux";
+import FpisContract from "../blockchain/ProductIdentificationContract";
 
 export default function CreateManufacturer() {
     const dispatch = useDispatch()
     const web3 = useSelector(state => state.web3)
-    const [manufacturer, setManufacturer] = useState({
-        name: '',
-        address: '',
-        phone: '',
-        email: ''
-    })
+    const [name, setName] = useState("")
+    const [address, setAddress] = useState("")
+    const [location, setLocation] = useState("")
 
-    const {name, address, phone, email} = manufacturer
-
-    const onChange = e => setManufacturer({...manufacturer, [e.target.name]: e.target.value})
-
-    const onSubmit = async e => {
-        e.preventDefault()
-        const accounts = await web3.eth.getAccounts()
-        console.log(accounts)
-        const web3 = new Web3(window.web3.currentProvider)
-        //declaring abi
-        const abi = []
-        const contract = new web3.eth.Contract(abi, address)
-        await contract.methods.createManufacturer(name, address, phone, email).send({from: accounts[0]})
+    const createManufacturer = async () => {
+        const account = web3.account
+        const result = await FpisContract.methods.createManufacturer(address, name, location).send({
+            from: account,
+            gas: 3000000
+        })
+        console.log(result)
     }
 
     return (
-        <form className="space-y-6" action="#" method="POST">
+        <div className="space-y-6">
             <div>
-                <label htmlFor="name" className="flex justify-center mt-5 text-xl font-medium text-gray-800">Create
+                <label className="flex justify-center mt-5 text-xl font-medium text-gray-800">Create
                     Manufacturer</label>
             </div>
 
             <div className="bg-white px-4 py-5 flex items-center justify-center shadow sm:rounded-lg sm:p-6">
-                <div className="md:grid md:grid-cols-3 md:gap-6">
-
-                    <div className="mt-5 md:col-span-2 md:mt-0">
-                        <div className="grid grid-cols-6 gap-6">
-                            <div className="col-span-6 sm:col-span-3">
-                                <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
-                                    First name
-                                </label>
-                                <input
-                                    type="text"
-                                    name="first-name"
-                                    placeholder='Enter the Name'
-                                    id="first-name"
-                                    autoComplete="given-name"
-                                    className="mt-1 block w-full rounded-xl h-7 border-blue-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                />
-                            </div>
-                            <br></br>
-                            <div className="col-span-6 sm:col-span-3">
-                                <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
-                                    Company Name
-                                </label>
-                                <input
-                                    type="text"
-                                    name="last-name"
-                                    id="last-name"
-                                    placeholder='Enter the Company Name'
-                                    autoComplete="family-name"
-                                    className="mt-1 block w-full rounded-xl h-7 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                />
-                            </div>
-
-                            <div className="col-span-6 sm:col-span-4">
-                                <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
-                                    Company Location
-                                </label>
-                                <input
-                                    type="text"
-                                    name="email-address"
-                                    id="email-address"
-                                    placeholder='Enter the Company Location'
-                                    autoComplete="email"
-                                    className="mt-1 block w-full rounded-xl h-7 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                />
-                            </div>
-                        </div>
+                <div>
+                    <div className="col-span-6 sm:col-span-3">
+                        <label className="block text-sm font-medium text-gray-700">
+                            Name
+                        </label>
+                        <input
+                            type="text"
+                            placeholder='Enter the Name'
+                            value={name}
+                            onChange={e => setName(e.target.value)}
+                            className="block px-4 w-96 h-10 rounded-md border-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        />
+                    </div>
+                    <br/>
+                    <div className="col-span-6 sm:col-span-3">
+                        <label className="block text-sm font-medium text-gray-700">
+                            Address
+                        </label>
+                        <input
+                            type="text"
+                            placeholder='Enter the Company Address'
+                            value={address}
+                            onChange={e => setAddress(e.target.value)}
+                            className="block px-4 w-96 h-10 rounded-md border-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        />
+                    </div>
+                    <br/>
+                    <div className="col-span-6 sm:col-span-4">
+                        <label className="block text-sm font-medium text-gray-700">
+                            Company Location
+                        </label>
+                        <input
+                            type="text"
+                            placeholder='Enter the Company Location'
+                            value={location}
+                            onChange={e => setLocation(e.target.value)}
+                            className="block px-4 w-96 h-10 rounded-md border-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        />
                     </div>
                 </div>
             </div>
@@ -89,17 +72,12 @@ export default function CreateManufacturer() {
             <div className="flex justify-center">
                 <button
                     type="button"
-                    className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                    Cancel
-                </button>
-                <button
-                    type="submit"
                     className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    onClick={createManufacturer}
                 >
                     Save
                 </button>
             </div>
-        </form>
+        </div>
     )
 }
