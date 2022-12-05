@@ -8,14 +8,20 @@ export default function CreateManufacturer() {
     const [name, setName] = useState("")
     const [address, setAddress] = useState("")
     const [location, setLocation] = useState("")
+    const [error, setError] = useState("")
 
     const createManufacturer = async () => {
-        const account = web3.account
-        const result = await FpisContract.methods.createManufacturer(address, name, location).send({
-            from: account,
-            gas: 3000000
-        })
-        console.log(result)
+        try {
+            const account = web3.account
+            const result = await FpisContract.methods.createManufacturer(address, name, location).send({
+                from: account,
+                gas: 3000000
+            })
+            console.log(result)
+        } catch (e) {
+            console.log(e)
+            setError(e.message.split(":")[2])
+        }
     }
 
     return (
@@ -77,6 +83,9 @@ export default function CreateManufacturer() {
                 >
                     Save
                 </button>
+            </div>
+            <div className="flex justify-center">
+                <label className="text-red-500">{error}</label>
             </div>
         </div>
     )

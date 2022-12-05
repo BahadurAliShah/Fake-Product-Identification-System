@@ -1,11 +1,25 @@
 import React, {useState} from 'react';
 import {useSelector} from "react-redux";
 import ProductsList from "./productsList";
+import FpisContract from "../blockchain/ProductIdentificationContract";
 
 export default function GetManufacturerProducts() {
     const [manufacturer, setManufacturer] = useState('');
+    const [products, setProducts] = useState([]);
+    const [error, setError] = useState('');
     const web3 = useSelector(state => state.web3);
 
+    const getProducts = async () => {
+        try {
+            const account = web3.account;
+            const result = await FpisContract.methods.getProductByAddress(manufacturer).call();
+            console.log("Get Manufacturer Products: ", result);
+            setProducts(result);
+        } catch (e) {
+            console.log(e);
+            setError(e.message.split(":")[2]);
+        }
+    }
     return (
         <div>
             <div>
@@ -33,12 +47,16 @@ export default function GetManufacturerProducts() {
             <div className="flex justify-center">
                 <button
                     type="submit"
+                    onClick={getProducts}
                     className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                     Get
                 </button>
             </div>
-            <ProductsList/>
+            <ProductsList Products={products}/>
+            <div className="flex justify-center">
+                <label className="text-red-500">{error}</label>
+            </div>
         </div>
     )
 }

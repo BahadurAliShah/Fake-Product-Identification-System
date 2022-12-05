@@ -1,11 +1,27 @@
 import React, {useState} from 'react';
 import {useSelector} from "react-redux";
+import FpisContract from "../blockchain/ProductIdentificationContract";
 
 export default function AddProduct() {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
+    const [error, setError] = useState('');
     const web3 = useSelector(state => state.web3);
+
+    const addProduct = async () => {
+        try {
+            const account = web3.account;
+            const result = await FpisContract.methods.createProduct(name, description, price).send({
+                from: account,
+                gas: 3000000
+            });
+            console.log(result);
+        } catch (e) {
+            console.log(e);
+            setError(e.message.split(":")[2]);
+        }
+    }
 
     return (
         <div>
@@ -75,10 +91,15 @@ export default function AddProduct() {
 
                 <button
                     type="submit"
+                    onClick={addProduct}
                     className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                     Save
                 </button>
+            </div>
+
+            <div className="flex justify-center">
+                <label className="text-red-500">{error}</label>
             </div>
         </div>
     )

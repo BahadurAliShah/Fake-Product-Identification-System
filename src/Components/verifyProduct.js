@@ -7,22 +7,30 @@ import Table from "./table";
 export const VerifyProduct = () => {
     const [productID, setProductID] = useState("");
     const [result, setResult] = useState("");
+    const [error, setError] = useState("");
     const web3 = useSelector((state) => state.web3.web3);
+    const [manufacturer, setManufacturer] = useState("");
+    const [currentOwner, setCurrentOwner] = useState("");
+    const [previousOwner, setPreviousOwner] = useState([]);
     const account = useSelector((state) => state.web3.account);
 
-    const verifyProduct = async (productID) => {
-        if (web3 !== null) {
-            return await FpisContract.methods.verifyProduct(productID).call({from: account});
-        } else {
-            return "Please connect to web3";
+    const verifyProduct = async () => {
+        try {
+            const temp = await FpisContract.methods.verifyProduct(productID).call({
+                from: account,
+                gas: 3000000,
+                value: 1000000000000000000,
+            });
+            setResult(temp[0]);
+            setCurrentOwner(temp[1]);
+            setManufacturer(temp[2][0]);
+            setPreviousOwner(temp[2].slice(1));
+            console.log("Verify Product: ", result);
+        } catch (e) {
+            console.log(e);
+            setError(e.message.split(":")[2]);
         }
     }
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const temp = await verifyProduct(productID);
-        setResult(temp);
-    };
 
     return (
         <div className={"m-5"}>
@@ -47,7 +55,7 @@ export const VerifyProduct = () => {
                     <button
                         type="submit"
                         className="absolute inset-y-0 right-0 flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-r-md text-white bg-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                        onClick={handleSubmit}
+                        onClick={verifyProduct}
                     >
                         Verify
                     </button>
@@ -59,21 +67,31 @@ export const VerifyProduct = () => {
                     <p className={"text-gray-900"}>{result}</p>
                 </div>
             </div>
-            <div>
+            <div className={"mt-5"}>
+                {manufacturer !== "" && (
                 <div className="px-4 sm:px-6 lg:px-8">
                     <h1 className="text-2xl font-semibold text-gray-900 inline-flex">Manufacturer:</h1>
-                    <p className={"inline-flex px-4"}>0x###########</p>
+                    <p className={"inline-flex px-4"}>{manufacturer}</p>
                 </div>
+                )}
+                {currentOwner !== "" && (
                 <div className="px-4 sm:px-6 lg:px-8">
                     <h1 className="text-2xl font-semibold text-gray-900 inline-flex">Current Owner:</h1>
-                    <p className={"inline-flex px-4"}>0x###########</p>
+                    <p className={"inline-flex px-4"}>{currentOwner}</p>
                 </div>
+                )}
             </div>
 
             <hr className={"mt-5"}/>
 
             <div className={"mt-5"}>
-                <Table/>
+                {previousOwner.length !== 0 && (
+                    <Table PreviousOwners={previousOwner} Manufacturer={manufacturer}/>
+                )}
+            </div>
+
+            <div className="flex justify-center">
+                <label className="text-red-500">{error}</label>
             </div>
         </div>
     );
