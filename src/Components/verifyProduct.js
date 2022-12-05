@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import FpisContract from "../blockchain/ProductIdentificationContract.js";
 import {useSelector} from "react-redux";
 import {MagnifyingGlassIcon} from "@heroicons/react/20/solid";
+import Table from "./table";
 
 export const VerifyProduct = () => {
     const [productID, setProductID] = useState("");
@@ -54,10 +55,25 @@ export const VerifyProduct = () => {
             </div>
 
             <div className={"mt-5"}>
-                <h3 className="text-lg font-medium leading-6 text-gray-900">Result</h3>
                 <div className={"mt-5"}>
                     <p className={"text-gray-900"}>{result}</p>
                 </div>
+            </div>
+            <div>
+                <div className="px-4 sm:px-6 lg:px-8">
+                    <h1 className="text-2xl font-semibold text-gray-900 inline-flex">Manufacturer:</h1>
+                    <p className={"inline-flex px-4"}>0x###########</p>
+                </div>
+                <div className="px-4 sm:px-6 lg:px-8">
+                    <h1 className="text-2xl font-semibold text-gray-900 inline-flex">Current Owner:</h1>
+                    <p className={"inline-flex px-4"}>0x###########</p>
+                </div>
+            </div>
+
+            <hr className={"mt-5"}/>
+
+            <div className={"mt-5"}>
+                <Table/>
             </div>
         </div>
     );

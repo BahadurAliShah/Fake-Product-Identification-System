@@ -28,7 +28,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "watch:css": "postcss src/assets/tailwind/tailwind.css -o src/assets/tailwind/main.css",
-    "compile": "solcjs --abi --include-path node_modules/ --base-path . src/blockchain/contracts/FakeProductIdentificationSystem.sol --output-dir blockchain/build"
+    "compile": "solcjs --abi --include-path node_modules/ --base-path . src/blockchain/contracts/FakeProductIdentificationSystem.sol --output-dir src/blockchain/build"
   },
   "eslintConfig": {
     "extends": [

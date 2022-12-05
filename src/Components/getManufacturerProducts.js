@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useSelector} from "react-redux";
+import ProductsList from "./productsList";
 
 export default function GetManufacturerProducts() {
     const [manufacturer, setManufacturer] = useState('');
@@ -37,6 +38,7 @@ export default function GetManufacturerProducts() {
                     Get
                 </button>
             </div>
+            <ProductsList/>
         </div>
     )
 }
