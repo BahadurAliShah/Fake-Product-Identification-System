@@ -172,23 +172,27 @@ contract ProductIdentification{
         return balance[owner];
     }
 
-    function getProductByManufacturer(address whoIs) public payable returns(product[] memory){
+    function getProductByAddress(address whoIs) public payable returns(product[] memory output){
+        bool flag1 = false;
+        bool flag2 = false;
         for (uint i=0; i<productArray.length; i++){
             if (productArray[i].manufactur == whoIs){
                 man_list_products.push(productArray[i]);
+                flag1 = true;
             }
-        }
-        return man_list_products;
-    }
-
-    function getProductByUser(address whoIs) public payable returns(product[] memory productsOfUser){
-        for (uint i=0; i<productArray.length; i++){
             if (productArray[i].currentOwner == whoIs){
                 user_list_products.push(productArray[i]);
+                flag2 = true;
             }
         }
-        productsOfUser = user_list_products;
-        return productsOfUser;
+        if (flag1 == true){
+            output = man_list_products;
+            return output;
+        }
+        if(flag2 == true){
+            output = user_list_products;
+            return output;
+        }
     }
 
     function getOldProductByUser(address whoIs) public payable returns(product[] memory soldProducts){

@@ -111,7 +111,7 @@ const abi = [{
     "type": "function"
 }, {
     "inputs": [{"internalType": "address", "name": "whoIs", "type": "address"}],
-    "name": "getProductByManufacturer",
+    "name": "getProductByAddress",
     "outputs": [{
         "components": [{
             "internalType": "uint256",
@@ -129,31 +129,7 @@ const abi = [{
             "internalType": "address",
             "name": "manufactur",
             "type": "address"
-        }], "internalType": "struct ProductIdentification.product[]", "name": "", "type": "tuple[]"
-    }],
-    "stateMutability": "payable",
-    "type": "function"
-}, {
-    "inputs": [{"internalType": "address", "name": "whoIs", "type": "address"}],
-    "name": "getProductByUser",
-    "outputs": [{
-        "components": [{
-            "internalType": "uint256",
-            "name": "productID",
-            "type": "uint256"
-        }, {"internalType": "string", "name": "productName", "type": "string"}, {
-            "internalType": "string",
-            "name": "pDescription",
-            "type": "string"
-        }, {"internalType": "uint256", "name": "price", "type": "uint256"}, {
-            "internalType": "address",
-            "name": "currentOwner",
-            "type": "address"
-        }, {"internalType": "address[]", "name": "ownersList", "type": "address[]"}, {
-            "internalType": "address",
-            "name": "manufactur",
-            "type": "address"
-        }], "internalType": "struct ProductIdentification.product[]", "name": "productsOfUser", "type": "tuple[]"
+        }], "internalType": "struct ProductIdentification.product[]", "name": "output", "type": "tuple[]"
     }],
     "stateMutability": "payable",
     "type": "function"
